@@ -12,9 +12,11 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@iconify-json/simple-icons": "^1.2.81",
     "@lucide/astro": "^1.14.0",
     "@tailwindcss/vite": "^4.2.4",
     "astro": "^6.2.2",
+    "astro-icon": "^1.1.5",
     "tailwindcss": "^4.2.4"
   },
   "devDependencies": {

@@ -1,4 +1,5 @@
 ---
+import { Icon } from "astro-icon/components";
 import Brain from "@lucide/astro/icons/brain";
 import Cloud from "@lucide/astro/icons/cloud";
 import CodeXml from "@lucide/astro/icons/code-xml";
@@ -33,18 +34,28 @@ const iconMap: Record<StackIcon, typeof LayoutDashboard> = {
 			<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 				{
 					stack.map((cat) => {
-						const Icon = iconMap[cat.icon];
+						const CategoryIcon = iconMap[cat.icon];
 						return (
-							<div class="rounded-2xl border-2 border-ink/15 shadow-md bg-white p-8 hover:border-primary/40 hover:shadow-lg transition-all">
+							<div class="rounded-2xl border-2 border-white/15 shadow-md bg-ink text-white p-8 hover:border-white/40 hover:shadow-lg transition-all">
 								<div class="flex items-center gap-3 mb-6">
-									<Icon size={22} class="text-primary shrink-0" />
-									<h3 class="text-base font-semibold tracking-wider text-secondary uppercase">
+									<CategoryIcon size={22} class="text-primary shrink-0" />
+									<h3 class="text-base font-semibold tracking-wider text-white uppercase">
 										{cat.title}
 									</h3>
 								</div>
 								<ul class="grid grid-cols-2 gap-x-6 gap-y-3">
 									{cat.items.map((item) => (
-										<li class="text-base text-ink">{item}</li>
+										<li class="flex items-center gap-2 text-base text-white">
+											{item.icon && (
+												<Icon
+													name={item.icon}
+													class="w-5 h-5 shrink-0"
+													style={item.color ? `color: ${item.color}` : undefined}
+													aria-hidden="true"
+												/>
+											)}
+											<span>{item.name}</span>
+										</li>
 									))}
 								</ul>
 							</div>
