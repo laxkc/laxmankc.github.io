@@ -1,46 +1,51 @@
-# Astro Starter Kit: Basics
+# laxmankc.dev
 
-```sh
-npm create astro@latest -- --template basics
+Personal portfolio — built with Astro, Tailwind CSS v4, and TypeScript.
+
+## Stack
+
+- **Astro 6** — static site framework
+- **Tailwind CSS v4** — styling, design tokens via `@theme` in `src/styles/global.css`
+- **TypeScript** — typed components and content collections
+- **Lucide** — icons (`@lucide/astro`)
+- **Manrope** — typography, self-hosted via Astro Fonts API
+
+## Project structure
+
+```
+src/
+├── assets/                  Images processed by Astro Image (logo, etc.)
+├── components/
+│   ├── cards/               WorkCard, EducationCard, AwardCard
+│   ├── layout/              Container, Section, Navbar, Footer
+│   ├── sections/            Hero, SelectedWork, EngineeringThinking,
+│   │                        Experience, TechStack, EducationRecognition, Contact
+│   └── ui/                  Button, Tag, SocialLink
+├── content/
+│   ├── work/                Project case studies (Markdown)
+│   └── posts/               Essays (Markdown)
+├── content.config.ts        Content collection schemas (Zod)
+├── data/                    Static data (nav, experience, stack, education, awards)
+├── layouts/Layout.astro     Page shell — head, fonts, favicons, manifest
+├── pages/index.astro        Homepage assembly
+└── styles/global.css        Design tokens + base layer
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Commands
 
-## 🚀 Project Structure
+| Command           | Action                          |
+| ----------------- | ------------------------------- |
+| `npm install`     | Install dependencies            |
+| `npm run dev`     | Dev server at `localhost:4321`  |
+| `npm run build`   | Build to `./dist/`              |
+| `npm run preview` | Preview the production build    |
+| `npx astro check` | Type-check Astro + TS files     |
 
-Inside of your Astro project, you'll see the following folders and files:
+## Editing content
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
-```
-
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+- **Projects** → add a Markdown file to `src/content/work/`
+- **Posts** → add a Markdown file to `src/content/posts/`
+- **Experience / stack / education / awards** → edit the typed arrays in `src/data/`
+- **Resume PDF** → replace `public/laxman_kc_cv.pdf`
+- **Hero image** → replace `public/hero-section.png`
+- **Favicons / PWA icons** → see `public/` (16, 32, 180, 192, 512 PNGs + `site.webmanifest`)
