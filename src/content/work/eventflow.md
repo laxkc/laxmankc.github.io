@@ -3,7 +3,7 @@ title: "EventFlow"
 year: 2026
 role: "Solo build"
 summary: "Production-grade event-driven job platform — FastAPI, Kafka, Redis. Decoupled auth, jobs, and notifications via async messaging; real-time updates over WebSockets; distributed tracing for reliability at scale."
-cover: "/hero-section.png"
+cover: "/works/event_flow.png"
 tags: ["Python", "FastAPI", "Kafka", "Redis", "WebSockets"]
 featured: true
 order: 1

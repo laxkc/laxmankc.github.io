@@ -3,7 +3,7 @@ title: "Industra AI"
 year: 2026
 role: "Solo build"
 summary: "Multimodal AI agent (text + images) with tool-calling, hybrid retrieval (BM25 + vector), and cached LLM calls. Produces grounded answers with citations, confidence signals, and per-turn cost metrics."
-cover: "/hero-section.png"
+cover: "/works/industra_ai.png"
 tags: ["Python", "LangChain", "RAG", "Vector DBs"]
 featured: true
 order: 2

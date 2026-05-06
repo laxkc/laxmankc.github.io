@@ -30,7 +30,7 @@ const work = (await getCollection("work", ({ data }) => data.featured))
 				A selection of systems I've designed and built.
 			</p>
 
-			<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+			<div class="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:auto-rows-fr">
 				{
 					work.map((item) => (
 						<WorkCard

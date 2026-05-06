@@ -3,7 +3,7 @@ title: "AgentTracer"
 year: 2026
 role: "Solo build"
 summary: "Open-source observability platform for AI agents — structured tracing, execution visibility, and runtime insights across agent workflows."
-cover: "/hero-section.png"
+cover: "/works/agent_tracer.png"
 tags: ["TypeScript", "AI Observability", "Tracing"]
 featured: true
 order: 3
