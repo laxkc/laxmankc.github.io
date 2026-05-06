@@ -3,7 +3,7 @@ import { Image } from "astro:assets";
 import Download from "@lucide/astro/icons/download";
 import Menu from "@lucide/astro/icons/menu";
 import logo from "../../assets/logo.png";
-import { navLinks, spySections } from "../../data/nav";
+import { navLinks } from "../../data/nav";
 import Container from "./Container.astro";
 ---
 
@@ -87,12 +87,10 @@ import Container from "./Container.astro";
 	const navLinkIds = new Set(links.map((l) => l.dataset.navLink));
 
 	// Track every section in spySections, even if it's not shown in the nav.
-	const trackedSections = spySections
-		.map((id) => {
-			const section = document.getElementById(id);
-			return section ? { id, section } : null;
-		})
-		.filter((s): s is { id: string; section: HTMLElement } => s !== null);
+	const trackedSections = spySections.flatMap((id) => {
+		const section = document.getElementById(id);
+		return section ? [{ id, section }] : [];
+	});
 
 	const setActive = (id: string | null) => {
 		for (const link of links) {
