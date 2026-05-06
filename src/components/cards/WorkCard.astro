@@ -12,6 +12,9 @@ interface Props {
 
 const { title, description, cover, tags = [], href } = Astro.props;
 const Wrapper = href ? "a" : "article";
+const coverSrc = cover.startsWith("/")
+	? `${import.meta.env.BASE_URL}${cover.slice(1)}`
+	: cover;
 ---
 
 <Wrapper
@@ -19,7 +22,7 @@ const Wrapper = href ? "a" : "article";
 	class="group flex flex-col rounded-2xl border border-ink/15 hover:border-primary/50 hover:shadow-lg transition-all overflow-hidden bg-white"
 >
 	<div class="aspect-video w-full bg-ink/5">
-		<img src={cover} alt="" class="w-full h-full object-cover" loading="lazy" decoding="async" />
+		<img src={coverSrc} alt="" class="w-full h-full object-cover" loading="lazy" decoding="async" />
 	</div>
 
 	<div class="flex flex-col gap-3 p-6 flex-1">

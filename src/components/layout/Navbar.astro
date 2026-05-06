@@ -9,7 +9,7 @@ import Container from "./Container.astro";
 <header class="sticky top-0 z-50 w-full bg-ink text-white">
 	<Container class="!py-0">
 		<div class="col-start-2 col-end-12 flex items-center justify-between h-16">
-			<a href="/" class="flex items-center gap-2 font-bold text-lg">
+			<a href={import.meta.env.BASE_URL} class="flex items-center gap-2 font-bold text-lg">
 				<Image src={logo} width={32} height={32} alt="" />
 				<span>LAXMAN KC</span>
 			</a>
@@ -33,7 +33,7 @@ import Container from "./Container.astro";
 			</nav>
 
 			<a
-				href="/laxman_kc_cv.pdf"
+				href={`${import.meta.env.BASE_URL}laxman_kc_cv.pdf`}
 				target="_blank"
 				rel="noopener"
 				class="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg border border-white text-white hover:bg-white hover:text-ink transition-colors"
