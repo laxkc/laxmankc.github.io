@@ -4,6 +4,8 @@ Personal portfolio — Astro 6, Tailwind CSS v4, TypeScript. Deployed to GitHub 
 
 Live: https://laxkc.github.io/laxmankc.github.io/
 
+![Site walkthrough](./media/demo.gif)
+
 ## Stack
 
 - **Astro 6** — static site framework
