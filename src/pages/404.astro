@@ -1,0 +1,37 @@
+---
+import ArrowLeft from "@lucide/astro/icons/arrow-left";
+import Layout from "../layouts/Layout.astro";
+import Container from "../components/layout/Container.astro";
+import Section from "../components/layout/Section.astro";
+import Button from "../components/ui/Button.astro";
+import Navbar from "../components/layout/Navbar.astro";
+import Footer from "../components/layout/Footer.astro";
+import "../styles/global.css";
+---
+
+<Layout title="Page not found — Laxman KC">
+	<Navbar />
+	<main>
+		<Section class="bg-ink text-white py-32 lg:py-48">
+			<Container>
+				<div class="col-start-2 col-end-12 text-center">
+					<p class="text-sm font-medium text-white/60 mb-6">404</p>
+					<h1 class="text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight">
+						This page <span class="text-primary">doesn't exist.</span>
+					</h1>
+					<p class="mt-8 text-xl text-white/70 max-w-xl mx-auto">
+						The link might be old or misspelled. Head back to the homepage and you'll find your
+						way.
+					</p>
+					<div class="mt-10 flex justify-center">
+						<Button href={import.meta.env.BASE_URL} size="lg">
+							<ArrowLeft size={18} aria-hidden="true" />
+							Back to home
+						</Button>
+					</div>
+				</div>
+			</Container>
+		</Section>
+	</main>
+	<Footer />
+</Layout>

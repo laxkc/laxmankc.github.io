@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import Download from "@lucide/astro/icons/download";
+import Menu from "@lucide/astro/icons/menu";
 import logo from "../../assets/logo.png";
 import { navLinks } from "../../data/nav";
 import Container from "./Container.astro";
@@ -32,15 +33,40 @@ import Container from "./Container.astro";
 				}
 			</nav>
 
-			<a
-				href={`${import.meta.env.BASE_URL}laxman_kc_cv.pdf`}
-				target="_blank"
-				rel="noopener"
-				class="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg border border-white text-white hover:bg-white hover:text-ink transition-colors"
-			>
-				<Download size={16} aria-hidden="true" />
-				Resume
-			</a>
+			<div class="flex items-center gap-2">
+				<details class="md:hidden relative" data-mobile-menu>
+					<summary
+						class="list-none cursor-pointer p-2 rounded-md hover:bg-white/10 transition-colors"
+						aria-label="Toggle menu"
+					>
+						<Menu size={20} aria-hidden="true" />
+					</summary>
+					<nav
+						class="absolute right-0 top-full mt-2 w-48 rounded-lg bg-ink border border-white/10 shadow-lg p-2 z-50"
+					>
+						{
+							navLinks.map((link) => (
+								<a
+									href={link.href}
+									class="block px-3 py-2 text-sm text-white/80 hover:text-primary hover:bg-white/5 rounded transition-colors"
+								>
+									{link.label}
+								</a>
+							))
+						}
+					</nav>
+				</details>
+
+				<a
+					href={`${import.meta.env.BASE_URL}laxman_kc_cv.pdf`}
+					target="_blank"
+					rel="noopener"
+					class="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg border border-white text-white hover:bg-white hover:text-ink transition-colors"
+				>
+					<Download size={16} aria-hidden="true" />
+					Resume
+				</a>
+			</div>
 		</div>
 	</Container>
 </header>
@@ -91,4 +117,11 @@ import Container from "./Container.astro";
 	window.addEventListener("scroll", schedule, { passive: true });
 	window.addEventListener("resize", schedule);
 	compute();
+
+	// Close mobile menu when a link inside is clicked
+	document.querySelectorAll<HTMLDetailsElement>("[data-mobile-menu]").forEach((d) => {
+		d.querySelectorAll("a").forEach((a) => {
+			a.addEventListener("click", () => d.removeAttribute("open"));
+		});
+	});
 </script>

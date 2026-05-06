@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://laxkc.github.io/laxmankc.github.io/sitemap-index.xml

@@ -2,6 +2,7 @@
 import { defineConfig, fontProviders } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
 import icon from "astro-icon";
+import sitemap from "@astrojs/sitemap";
 
 const isProd = process.env.NODE_ENV === "production";
 
@@ -9,7 +10,7 @@ const isProd = process.env.NODE_ENV === "production";
 export default defineConfig({
   site: "https://laxkc.github.io",
   base: isProd ? "/laxmankc.github.io/" : "/",
-  integrations: [icon()],
+  integrations: [icon(), sitemap()],
   vite: {
     plugins: [tailwindcss()],
   },
