@@ -31,7 +31,7 @@ const iconMap: Record<StackIcon, typeof LayoutDashboard> = {
 				The toolbox I reach for when building.
 			</p> -->
 
-			<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+			<div data-reveal-group class="grid grid-cols-1 md:grid-cols-3 gap-6">
 				{
 					stack.map((cat) => {
 						const CategoryIcon = iconMap[cat.icon];

@@ -36,7 +36,7 @@ const work = (await getCollection("work", ({ data }) => data.featured))
 						<p class="text-base text-secondary">More projects shipping soon.</p>
 					</div>
 				) : (
-					<div class="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:auto-rows-fr">
+					<div data-reveal-group class="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:auto-rows-fr">
 						{work.map((item) => (
 							<WorkCard
 								title={item.data.title}

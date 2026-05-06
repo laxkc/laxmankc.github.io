@@ -55,6 +55,11 @@ const imageUrl = new URL(`${base}${image}`, Astro.site ?? Astro.url.origin).toSt
 	</body>
 </html>
 
+<script>
+	import { setupReveal } from "../scripts/reveal";
+	setupReveal();
+</script>
+
 <style>
 	html,
 	body {

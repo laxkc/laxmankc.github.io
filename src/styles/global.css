@@ -51,6 +51,15 @@
 		}
 	}
 
+	@media (prefers-reduced-motion: no-preference) {
+		[data-reveal],
+		[data-reveal-group] > * {
+			opacity: 0;
+			transform: translateY(20px);
+			will-change: opacity, transform;
+		}
+	}
+
 	body {
 		background-color: var(--color-bg);
 		color: var(--color-ink);
