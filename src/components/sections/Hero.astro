@@ -4,28 +4,42 @@ import Handshake from "@lucide/astro/icons/handshake";
 import Container from "../layout/Container.astro";
 import Section from "../layout/Section.astro";
 import Button from "../ui/Button.astro";
+
+const headline = "Software Engineer, System Designer and Builder";
+const accentWords = new Set(["Designer", "Builder"]);
+const words = headline.split(" ");
 ---
 
 <Section class="bg-ink text-white py-32 lg:py-48">
   <Container>
     <div
-      data-reveal-group
       class="col-start-2 col-end-12 flex flex-col items-center lg:flex-row lg:items-center gap-12 lg:gap-16"
     >
       <div class="lg:basis-1/2">
-        <!-- <p class="text-sm font-medium text-white/60 mb-6">Hi, I'm Laxman —</p> -->
-        <h1
-          class="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight"
-        >
-          Software Engineer, System <span class="text-primary">Designer</span> and
-          <span class="text-primary">Builder</span>
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight">
+          {
+            words.map((word, i) => (
+              <Fragment>
+                <span
+                  data-hero-word
+                  class:list={[
+                    "inline-block",
+                    accentWords.has(word) && "text-primary",
+                  ]}
+                >
+                  {word}
+                </span>
+                {i < words.length - 1 && " "}
+              </Fragment>
+            ))
+          }
         </h1>
-        <p class="mt-8 text-xl text-white/70 max-w-2xl">
+        <p data-hero-element class="mt-8 text-xl text-white/70 max-w-2xl">
           I design and build software with a focus on performance, and long-term
           maintainability.
         </p>
-        <div class="mt-10 flex flex-wrap gap-4">
-          <Button href="#work" size="lg" class="min-w-56">
+        <div data-hero-element class="mt-10 flex flex-wrap gap-4">
+          <Button href="#work" size="lg" class="min-w-56 hover:scale-[1.02] active:scale-[0.98] transition-transform">
             View my work
             <ArrowRight size={18} aria-hidden="true" />
           </Button>
@@ -35,7 +49,7 @@ import Button from "../ui/Button.astro";
             rel="noopener noreferrer"
             size="lg"
             variant="ghostOnDark"
-            class="min-w-56"
+            class="min-w-56 hover:scale-[1.02] active:scale-[0.98] transition-transform"
           >
             Let's connect
             <Handshake size={18} aria-hidden="true" />
@@ -43,7 +57,10 @@ import Button from "../ui/Button.astro";
         </div>
       </div>
 
-      <div class="lg:basis-1/2 w-full max-w-md lg:max-w-none mx-auto flex items-center justify-center">
+      <div
+        data-hero-image
+        class="lg:basis-1/2 w-full max-w-md lg:max-w-none mx-auto flex items-center justify-center"
+      >
         <img
           src={`${import.meta.env.BASE_URL}hero-section.png`}
           alt=""
@@ -58,3 +75,40 @@ import Button from "../ui/Button.astro";
     </div>
   </Container>
 </Section>
+
+<script>
+  import { animate, stagger } from "motion";
+
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (!reduced) {
+    const ease = [0.22, 1, 0.36, 1] as const;
+
+    const words = Array.from(
+      document.querySelectorAll<HTMLElement>("[data-hero-word]"),
+    );
+    if (words.length > 0) {
+      animate(
+        words,
+        { opacity: [0, 1], y: [20, 0] },
+        { duration: 0.5, delay: stagger(0.06), ease },
+      );
+    }
+
+    const elements = Array.from(
+      document.querySelectorAll<HTMLElement>("[data-hero-element]"),
+    );
+    if (elements.length > 0) {
+      animate(
+        elements,
+        { opacity: [0, 1], y: [20, 0] },
+        { duration: 0.5, delay: stagger(0.1, { startDelay: 0.4 }), ease },
+      );
+    }
+
+    const image = document.querySelector<HTMLElement>("[data-hero-image]");
+    if (image) {
+      animate(image, { opacity: [0, 1] }, { duration: 0.5, delay: 0.3, ease });
+    }
+  }
+</script>

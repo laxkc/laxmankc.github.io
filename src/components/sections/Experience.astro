@@ -7,7 +7,7 @@ import Section from "../layout/Section.astro";
 import Tag from "../ui/Tag.astro";
 ---
 
-<Section id="experience" class="py-24 lg:py-32">
+<Section id="experience" data-timeline-section class="py-24 lg:py-32">
 	<Container>
 		<div class="col-start-2 col-end-12">
 			<div class="flex items-baseline justify-between gap-4 mb-4">
@@ -18,9 +18,10 @@ import Tag from "../ui/Tag.astro";
 				A timeline of roles I've held.
 			</p> -->
 
-			<div class="relative">
+			<div class="relative" data-timeline-wrapper>
 				<div
-					class="absolute left-2.5 top-3 bottom-3 w-px bg-ink/15"
+					data-timeline-rail
+					class="absolute left-2.5 top-3 bottom-3 w-px bg-ink/15 origin-top"
 					aria-hidden="true"
 				>
 				</div>
@@ -29,11 +30,14 @@ import Tag from "../ui/Tag.astro";
 					{
 						experience.map((entry) => (
 							<div class="relative pl-10">
-								<Circle
-									aria-hidden="true"
-									size={14}
-									class="absolute left-2.5 top-1 -translate-x-1/2 fill-current text-primary rounded-full ring-4 ring-bg"
-								/>
+								<span class="absolute left-2.5 top-1 -translate-x-1/2 inline-block">
+									<Circle
+										aria-hidden="true"
+										size={14}
+										data-timeline-marker
+										class="fill-current text-primary rounded-full ring-4 ring-bg block"
+									/>
+								</span>
 
 								<div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
 									<div class="lg:col-span-2">
@@ -91,3 +95,27 @@ import Tag from "../ui/Tag.astro";
 		</div>
 	</Container>
 </Section>
+
+<script>
+	import { animate, inView, scroll } from "motion";
+
+	const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+	if (!reduced) {
+		const ease = [0.22, 1, 0.36, 1] as const;
+
+		const wrapper = document.querySelector<HTMLElement>("[data-timeline-wrapper]");
+		const rail = document.querySelector<HTMLElement>("[data-timeline-rail]");
+		if (rail && wrapper) {
+			scroll(animate(rail, { scaleY: [0, 1] }), {
+				target: wrapper,
+				offset: ["start 80%", "end 20%"],
+			});
+		}
+
+		document.querySelectorAll<HTMLElement>("[data-timeline-marker]").forEach((m) => {
+			inView(m, () => {
+				animate(m, { scale: [0, 1] }, { duration: 0.5, ease });
+			});
+		});
+	}
+</script>

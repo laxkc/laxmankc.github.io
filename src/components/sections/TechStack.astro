@@ -36,20 +36,25 @@ const iconMap: Record<StackIcon, typeof LayoutDashboard> = {
 					stack.map((cat) => {
 						const CategoryIcon = iconMap[cat.icon];
 						return (
-							<div class="rounded-2xl border-2 border-white/15 shadow-md bg-ink text-white p-8 hover:border-white/40 hover:shadow-lg transition-all">
+							<div
+								class="group rounded-2xl border-2 border-white/15 shadow-md bg-ink text-white p-8 hover:border-white/40 hover:shadow-xl hover:-translate-y-1.5 transition-all duration-250 ease-[cubic-bezier(0.22,1,0.36,1)]"
+							>
 								<div class="flex items-center gap-3 mb-6">
-									<CategoryIcon size={22} class="text-primary shrink-0" />
+									<CategoryIcon
+										size={22}
+										class="text-primary shrink-0 transition-transform duration-250 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-110"
+									/>
 									<h3 class="text-base font-semibold tracking-wider text-white uppercase">
 										{cat.title}
 									</h3>
 								</div>
 								<ul class="grid grid-cols-2 gap-x-6 gap-y-3">
 									{cat.items.map((item) => (
-										<li class="flex items-center gap-2 text-base text-white">
+										<li class="group/item flex items-center gap-2 text-base text-white">
 											{item.icon && (
 												<Icon
 													name={item.icon}
-													class="w-5 h-5 shrink-0"
+													class="w-5 h-5 shrink-0 transition-transform duration-250 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/item:scale-110"
 													style={item.color ? `color: ${item.color}` : undefined}
 													aria-hidden="true"
 												/>

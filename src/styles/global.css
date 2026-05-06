@@ -58,6 +58,18 @@
 			transform: translateY(20px);
 			will-change: opacity, transform;
 		}
+		[data-reveal-group][data-reveal-direction="x"] > * {
+			transform: translateX(-20px);
+		}
+		[data-reveal-group][data-reveal-direction="fade"] > * {
+			transform: none;
+		}
+		[data-timeline-rail] {
+			transform: scaleY(0);
+		}
+		[data-timeline-marker] {
+			transform: scale(0);
+		}
 	}
 
 	body {

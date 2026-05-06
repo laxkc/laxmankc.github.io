@@ -3,8 +3,12 @@ export const navLinks = [
 	{ label: "Thinking", href: "#thinking" },
 	{ label: "Experience", href: "#experience" },
 	{ label: "Stack", href: "#stack" },
-	// { label: "Contact", href: "#contact" },
 ] as const;
+
+// All sections the scroll-spy should track, including ones not shown in the nav.
+// When the user scrolls into a non-nav section (e.g. "education"), the navbar
+// clears its active state instead of leaving a stale link highlighted.
+export const spySections = ["work", "thinking", "experience", "stack", "education"] as const;
 
 export const socials = [
 	{ platform: "github", label: "GitHub", href: "https://github.com/laxkc" },

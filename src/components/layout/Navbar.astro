@@ -3,11 +3,18 @@ import { Image } from "astro:assets";
 import Download from "@lucide/astro/icons/download";
 import Menu from "@lucide/astro/icons/menu";
 import logo from "../../assets/logo.png";
-import { navLinks } from "../../data/nav";
+import { navLinks, spySections } from "../../data/nav";
 import Container from "./Container.astro";
 ---
 
 <header class="sticky top-0 z-50 w-full bg-ink text-white">
+	<div
+		data-scroll-progress
+		class="absolute top-0 left-0 h-0.5 w-full bg-primary origin-left"
+		style="transform: scaleX(0);"
+		aria-hidden="true"
+	>
+	</div>
 	<Container class="!py-0">
 		<div class="col-start-2 col-end-12 flex items-center justify-between h-16">
 			<a href={import.meta.env.BASE_URL} class="flex items-center gap-2 font-bold text-lg">
@@ -72,19 +79,23 @@ import Container from "./Container.astro";
 </header>
 
 <script>
+	import { spySections } from "../../data/nav";
+
 	const THRESHOLD = 96;
 
 	const links = Array.from(document.querySelectorAll<HTMLAnchorElement>("[data-nav-link]"));
-	const pairs = links
-		.map((link) => {
-			const id = link.dataset.navLink ?? "";
+	const navLinkIds = new Set(links.map((l) => l.dataset.navLink));
+
+	// Track every section in spySections, even if it's not shown in the nav.
+	const trackedSections = spySections
+		.map((id) => {
 			const section = document.getElementById(id);
-			return section ? { link, section, id } : null;
+			return section ? { id, section } : null;
 		})
-		.filter((p): p is { link: HTMLAnchorElement; section: HTMLElement; id: string } => p !== null);
+		.filter((s): s is { id: string; section: HTMLElement } => s !== null);
 
 	const setActive = (id: string | null) => {
-		for (const { link } of pairs) {
+		for (const link of links) {
 			const isActive = link.dataset.navLink === id;
 			link.dataset.active = isActive ? "true" : "false";
 			if (isActive) link.setAttribute("aria-current", "true");
@@ -93,12 +104,14 @@ import Container from "./Container.astro";
 	};
 
 	const compute = () => {
-		let activeId: string | null = null;
-		for (const { section, id } of pairs) {
-			if (section.getBoundingClientRect().top <= THRESHOLD) activeId = id;
+		// Find the last section whose top has crossed the threshold line.
+		let currentId: string | null = null;
+		for (const { id, section } of trackedSections) {
+			if (section.getBoundingClientRect().top <= THRESHOLD) currentId = id;
 			else break;
 		}
-		setActive(activeId);
+		// Highlight only if the current section also has a nav link.
+		setActive(currentId && navLinkIds.has(currentId) ? currentId : null);
 	};
 
 	let frame = 0;
@@ -110,8 +123,9 @@ import Container from "./Container.astro";
 		});
 	};
 
-	for (const { link, id } of pairs) {
-		link.addEventListener("click", () => setActive(id));
+	for (const link of links) {
+		const id = link.dataset.navLink;
+		if (id) link.addEventListener("click", () => setActive(id));
 	}
 
 	window.addEventListener("scroll", schedule, { passive: true });
@@ -123,5 +137,15 @@ import Container from "./Container.astro";
 		d.querySelectorAll("a").forEach((a) => {
 			a.addEventListener("click", () => d.removeAttribute("open"));
 		});
+	});
+
+	// Scroll progress indicator
+	import("motion").then(({ scroll }) => {
+		const bar = document.querySelector<HTMLElement>("[data-scroll-progress]");
+		if (bar) {
+			scroll((progress: number) => {
+				bar.style.transform = `scaleX(${progress})`;
+			});
+		}
 	});
 </script>
