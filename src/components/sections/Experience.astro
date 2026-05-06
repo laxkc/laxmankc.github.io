@@ -1,0 +1,93 @@
+---
+import Circle from "@lucide/astro/icons/circle";
+import Dot from "@lucide/astro/icons/dot";
+import { experience } from "../../data/experience";
+import Container from "../layout/Container.astro";
+import Section from "../layout/Section.astro";
+import Tag from "../ui/Tag.astro";
+---
+
+<Section id="experience" class="py-24 lg:py-32">
+	<Container>
+		<div class="col-start-2 col-end-12">
+			<div class="flex items-baseline justify-between gap-4 mb-4">
+				<h2 class="text-4xl md:text-5xl font-bold">Experience</h2>
+			</div>
+
+			<!-- <p class="text-lg text-secondary max-w-2xl mb-12">
+				A timeline of roles I've held.
+			</p> -->
+
+			<div class="relative">
+				<div
+					class="absolute left-2.5 top-3 bottom-3 w-px bg-ink/15"
+					aria-hidden="true"
+				>
+				</div>
+
+				<div class="space-y-12 lg:space-y-16">
+					{
+						experience.map((entry) => (
+							<div class="relative pl-10">
+								<Circle
+									aria-hidden="true"
+									size={14}
+									class="absolute left-2.5 top-1 -translate-x-1/2 fill-current text-primary rounded-full ring-4 ring-bg"
+								/>
+
+								<div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+									<div class="lg:col-span-2">
+										<p class="text-sm font-medium text-secondary">{entry.date}</p>
+									</div>
+
+									<div class="lg:col-span-3">
+										<h3 class="text-lg font-semibold leading-tight">{entry.role}</h3>
+										<p class="mt-1 text-sm text-secondary">
+											{
+												entry.companyUrl ? (
+													<a
+														href={entry.companyUrl}
+														class="hover:text-primary transition-colors"
+														target="_blank"
+														rel="noopener noreferrer"
+													>
+														{entry.company}
+													</a>
+												) : (
+													entry.company
+												)
+											}
+											<br />
+											{entry.location}
+										</p>
+									</div>
+
+									<div class="lg:col-span-5">
+										<ul class="space-y-2">
+											{entry.bullets.map((b) => (
+												<li class="flex gap-1 text-base text-ink/80">
+													<Dot
+														aria-hidden="true"
+														size={20}
+														class="text-ink/40 shrink-0 mt-0.5"
+													/>
+													<span>{b}</span>
+												</li>
+											))}
+										</ul>
+									</div>
+
+									<div class="lg:col-span-2">
+										<div class="flex flex-wrap gap-2">
+											{entry.tech.map((t) => <Tag>{t}</Tag>)}
+										</div>
+									</div>
+								</div>
+							</div>
+						))
+					}
+				</div>
+			</div>
+		</div>
+	</Container>
+</Section>

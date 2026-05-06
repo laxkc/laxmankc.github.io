@@ -1,0 +1,39 @@
+---
+import AwardCard from "../cards/AwardCard.astro";
+import EducationCard from "../cards/EducationCard.astro";
+import { awards } from "../../data/awards";
+import { education } from "../../data/education";
+import Container from "../layout/Container.astro";
+import Section from "../layout/Section.astro";
+---
+
+<Section id="education" class="py-24 lg:py-32">
+	<Container>
+		<div class="col-start-2 col-end-12">
+			<div class="flex items-baseline justify-between gap-4 mb-4">
+				<h2 class="text-4xl md:text-5xl font-bold">Education & Recognition</h2>
+			</div>
+
+			<p class="text-lg text-secondary max-w-2xl mb-12">
+				My academic foundation and achievements that shaped my thinking and approach to
+				building impactful systems.
+			</p>
+
+			<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:auto-rows-fr">
+				<EducationCard {...education[0]} />
+				<AwardCard {...awards[0]} />
+				<EducationCard {...education[1]} />
+				<AwardCard {...awards[1]} />
+			</div>
+
+			<div
+				class="mt-12 lg:mt-16 rounded-r-2xl border-l-4 border-primary bg-primary-soft p-6 lg:p-8"
+			>
+				<p class="text-base lg:text-lg italic text-ink/80 text-left">
+					Combining technical expertise with human understanding to build systems that are not
+					only scalable and reliable, but also meaningful and people-focused.
+				</p>
+			</div>
+		</div>
+	</Container>
+</Section>

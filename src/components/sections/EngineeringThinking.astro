@@ -1,0 +1,93 @@
+---
+import CircleCheck from "@lucide/astro/icons/circle-check";
+import Dot from "@lucide/astro/icons/dot";
+import Layers from "@lucide/astro/icons/layers";
+import ShieldCheck from "@lucide/astro/icons/shield-check";
+import Zap from "@lucide/astro/icons/zap";
+import Container from "../layout/Container.astro";
+import Section from "../layout/Section.astro";
+
+const principles = [
+	{
+		title: "Systems Design",
+		Icon: Layers,
+		color: "text-primary",
+		bullets: [
+			"Boundaries explicit, not implicit",
+			"Compose around contracts",
+			"Optimize for change, not perfection",
+		],
+	},
+	{
+		title: "Reliability",
+		Icon: ShieldCheck,
+		color: "text-emerald-400",
+		bullets: [
+			"Fail loudly, recover gracefully",
+			"Idempotent by default",
+			"Observability is part of the deliverable",
+		],
+	},
+	{
+		title: "Performance",
+		Icon: Zap,
+		color: "text-amber-400",
+		bullets: [
+			"Measure first, optimize second",
+			"Caches solve once, cost forever",
+			"Latency is a UX feature",
+		],
+	},
+	{
+		title: "Code Quality",
+		Icon: CircleCheck,
+		color: "text-sky-400",
+		bullets: [
+			"Types are documentation",
+			"Small reversible commits",
+			"Tests describe behavior, not implementation",
+		],
+	},
+];
+---
+
+<Section id="thinking" class="bg-ink text-white py-24 lg:py-32">
+	<Container>
+		<div class="col-start-2 col-end-12">
+			<div class="flex items-baseline justify-between gap-4 mb-4">
+				<h2 class="text-4xl md:text-5xl font-bold">Engineering thinking</h2>
+			</div>
+
+			<p class="text-lg text-white/70 max-w-2xl mb-12">
+				Principles and practices I follow while building systems.
+			</p>
+
+			<div
+				class="grid grid-cols-1 lg:grid-cols-4 divide-y lg:divide-y-0 lg:divide-x divide-white/10"
+			>
+				{
+					principles.map(({ title, Icon, color, bullets }) => (
+						<div class="p-6 lg:p-8">
+							<div class="flex items-center gap-3 mb-6">
+								<Icon size={20} class:list={[color, "shrink-0"]} />
+								<h3 class="text-lg font-semibold">{title}</h3>
+							</div>
+							<ul class="space-y-3">
+								{bullets.map((b) => (
+									<li class="flex gap-1 text-base text-white/70">
+										<Dot
+											aria-hidden="true"
+											size={20}
+											class="text-white/40 shrink-0 mt-0.5"
+										/>
+										<span>{b}</span>
+									</li>
+								))}
+							</ul>
+						</div>
+					))
+				}
+			</div>
+		</div>
+	</Container>
+</Section>

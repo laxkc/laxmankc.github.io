@@ -1,0 +1,57 @@
+---
+import Brain from "@lucide/astro/icons/brain";
+import Cloud from "@lucide/astro/icons/cloud";
+import CodeXml from "@lucide/astro/icons/code-xml";
+import Database from "@lucide/astro/icons/database";
+import LayoutDashboard from "@lucide/astro/icons/layout-dashboard";
+import Server from "@lucide/astro/icons/server";
+import { stack, type StackIcon } from "../../data/stack";
+import Container from "../layout/Container.astro";
+import Section from "../layout/Section.astro";
+
+const iconMap: Record<StackIcon, typeof LayoutDashboard> = {
+	"code-xml": CodeXml,
+	"layout-dashboard": LayoutDashboard,
+	server: Server,
+	database: Database,
+	brain: Brain,
+	cloud: Cloud,
+};
+---
+
+<Section id="stack" class="bg-primary text-white py-24 lg:py-32">
+	<Container>
+		<div class="col-start-2 col-end-12">
+			<div class="flex items-baseline justify-between gap-4 mb-4">
+				<h2 class="text-4xl md:text-5xl font-bold">Tech Stack</h2>
+			</div>
+<!-- 
+			<p class="text-lg text-secondary max-w-2xl mb-12">
+				The toolbox I reach for when building.
+			</p> -->
+
+			<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+				{
+					stack.map((cat) => {
+						const Icon = iconMap[cat.icon];
+						return (
+							<div class="rounded-2xl border-2 border-ink/15 shadow-md bg-white p-8 hover:border-primary/40 hover:shadow-lg transition-all">
+								<div class="flex items-center gap-3 mb-6">
+									<Icon size={22} class="text-primary shrink-0" />
+									<h3 class="text-base font-semibold tracking-wider text-secondary uppercase">
+										{cat.title}
+									</h3>
+								</div>
+								<ul class="grid grid-cols-2 gap-x-6 gap-y-3">
+									{cat.items.map((item) => (
+										<li class="text-base text-ink">{item}</li>
+									))}
+								</ul>
+							</div>
+						);
+					})
+				}
+			</div>
+		</div>
+	</Container>
+</Section>

@@ -1,0 +1,35 @@
+---
+import Medal from "@lucide/astro/icons/medal";
+import Trophy from "@lucide/astro/icons/trophy";
+import type { AwardEntry } from "../../data/awards";
+import Tag from "../ui/Tag.astro";
+
+type Props = AwardEntry;
+
+const { place, placeLabel, event, organization, year, description, tags } = Astro.props;
+
+const Icon = place === 1 ? Trophy : Medal;
+const iconColor =
+	place === 1 ? "text-amber-500" : place === 2 ? "text-slate-400" : "text-orange-700";
+---
+
+<article
+	class="rounded-2xl border-2 border-ink/15 shadow-md bg-white p-6 lg:p-8"
+>
+	<div class="flex items-center gap-2">
+		<Icon size={22} class:list={[iconColor, "shrink-0"]} />
+		<span class="text-base font-semibold">{placeLabel}</span>
+	</div>
+
+	<h3 class="mt-4 text-2xl font-semibold leading-tight">{event}</h3>
+
+	<p class="mt-2 text-sm text-secondary">
+		{organization} · {year}
+	</p>
+
+	<p class="mt-4 text-base text-ink/80">{description}</p>
+
+	<div class="mt-5 flex flex-wrap gap-2">
+		{tags.map((t) => <Tag>{t}</Tag>)}
+	</div>
+</article>
