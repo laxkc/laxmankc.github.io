@@ -26,6 +26,7 @@ export const stack: StackCategory[] = [
 			{ name: "Python", icon: "simple-icons:python", color: "#4B8BBE" },
 			{ name: "TypeScript", icon: "simple-icons:typescript", color: "#3178C6" },
 			{ name: "JavaScript", icon: "simple-icons:javascript", color: "#F7DF1E" },
+			{ name: "PHP", icon: "simple-icons:php", color: "#777BB4" },
 			{ name: "C/C++", icon: "simple-icons:cplusplus", color: "#649AD2" },
 			{ name: "SQL", icon: "simple-icons:postgresql", color: "#4169E1" },
 		],
@@ -47,6 +48,7 @@ export const stack: StackCategory[] = [
 		items: [
 			{ name: "FastAPI", icon: "simple-icons:fastapi", color: "#22D3B5" },
 			{ name: "Node.js", icon: "simple-icons:nodedotjs", color: "#83C745" },
+			{ name: "WordPress", icon: "simple-icons:wordpress", color: "#3DA9F5" },
 			{ name: "REST APIs", icon: "simple-icons:swagger", color: "#85EA2D" },
 			{ name: "WebSockets", icon: "simple-icons:socketdotio", color: "#FFFFFF" },
 			{ name: "OpenAPI", icon: "simple-icons:openapiinitiative", color: "#9CD850" },

@@ -7,7 +7,7 @@ import WorkCard from "../cards/WorkCard.astro";
 
 const work = (await getCollection("work", ({ data }) => data.featured))
 	.sort((a, b) => a.data.order - b.data.order)
-	.slice(0, 4);
+	.slice(0, 6);
 ---
 
 <Section id="work" class="py-24 lg:py-32">
